@@ -2,188 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- Evita el zoom accidental en móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sokoban - 5 Niveles</title>
-    <style>
-        :root {
-            --wall-color: #7f8c8d;
-            --floor-color: #ecf0f1;
-            --box-color: #e67e22;
-            --box-border: #d35400;
-            --box-done: #2ecc71;
-            --box-done-border: #27ae60;
-            --player-color: #3498db;
-            --goal-color: #e74c3c;
-        }
-
-        /* Bloquea la selección de texto para que no moleste al jugar */
-        * {
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: none; /* Previene scroll al deslizar en móviles */
-        }
-
-        body {
-            background-color: #2c3e50;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding-top: 20px;
-        }
-
-        h1 { margin-bottom: 0px; font-size: 2rem;}
-        h2 { margin-top: 5px; color: #f39c12; font-size: 1.2rem; }
-        p { color: #bdc3c7; margin-bottom: 15px; text-align: center; max-width: 400px; font-size: 0.9rem;}
-
-        #game-board {
-            display: grid;
-            background-color: #34495e;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            gap: 2px;
-            margin-bottom: 15px;
-        }
-
-        .cell {
-            width: 40px;
-            height: 40px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .wall {
-            background-color: var(--wall-color);
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-        }
-
-        .floor {
-            background-color: var(--floor-color);
-            border-radius: 4px;
-        }
-
-        .goal::after {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background-color: var(--goal-color);
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 5px rgba(231, 76, 60, 0.8);
-        }
-
-        .box {
-            width: 32px;
-            height: 32px;
-            background-color: var(--box-color);
-            border: 3px solid var(--box-border);
-            border-radius: 4px;
-            position: absolute;
-            z-index: 10;
-            box-sizing: border-box;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .box.on-goal {
-            background-color: var(--box-done);
-            border-color: var(--box-done-border);
-        }
-
-        .player {
-            width: 28px;
-            height: 28px;
-            background-color: var(--player-color);
-            border-radius: 50%;
-            position: absolute;
-            z-index: 20;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-        }
-
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(3, 50px);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .controls button {
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            background-color: #95a5a6;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px #7f8c8d;
-        }
-
-        .controls button:active {
-            box-shadow: 0 0 #7f8c8d;
-            transform: translateY(4px);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            transition: background 0.2s;
-        }
-
-        .btn-undo { background-color: #f39c12; color: white; }
-        .btn-undo:hover { background-color: #d35400; }
-
-        .btn-restart { background-color: #e74c3c; color: white; }
-        .btn-restart:hover { background-color: #c0392b; }
-        
-        .btn-next { background-color: #2ecc71; color: white; display: none; }
-        .btn-next:hover { background-color: #27ae60; }
-        
-        #win-message {
-            display: none;
-            color: #2ecc71;
-            font-size: 22px;
-            font-weight: bold;
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        /* Ocultar las flechas en PC para no ocupar tanto espacio si hay teclado */
-        @media (min-width: 768px) {
-            .controls { display: none; }
-        }
-    </style>
+    <title>Sokoban - Nivel 1</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>Sokoban</h1>
-    <h2>Nivel <span id="level-display">1</span> / 5</h2>
-    <p>Usa WASD, las flechas o desliza en tu celular para empujar las cajas.</p>
+    <h2>Nivel 1</h2>
+    <p>Usa WASD, las flechas o desliza para empujar.</p>
 
     <div id="game-board"></div>
-    
     <div id="win-message">¡Nivel Completado! 🎉</div>
 
     <div class="controls">
-        <div></div>
-        <button onclick="handleMove(-1, 0)">⬆️</button>
-        <div></div>
+        <div></div><button onclick="handleMove(-1, 0)">⬆️</button><div></div>
         <button onclick="handleMove(0, -1)">⬅️</button>
         <button onclick="handleMove(1, 0)">⬇️</button>
         <button onclick="handleMove(0, 1)">➡️</button>
@@ -191,246 +24,23 @@
 
     <div class="action-buttons">
         <button class="btn btn-undo" onclick="undo()">↩️ Deshacer</button>
-        <button class="btn btn-restart" onclick="loadLevel(currentLevelIndex)">🔄 Reiniciar</button>
-        <button id="btn-next" class="btn btn-next" onclick="nextLevel()">Siguiente ➡️</button>
+        <button class="btn btn-restart" onclick="initGame()">🔄 Reiniciar</button>
+        <button id="btn-next" class="btn btn-next">Siguiente ➡️</button>
     </div>
 
+    <!-- AQUÍ SE DEFINE EL MAPA Y EL SIGUIENTE NIVEL -->
     <script>
-        // Los 5 niveles
-        const levels = [
-            [ // Nivel 1
-                "######",
-                "#    #",
-                "# @$ #",                 "#  . #",                 "######"             ],             [ // Nivel 2                 "#######",                 "#     #",                 "#  .  #",                 "# $ $ #",
-                "#  .  #",
-                "#  @  #",
-                "#######"
-            ],
-            [ // Nivel 3
-                "########",
-                "#   .  #",
-                "#   $  #",
-                "# .$@$.#",
-                "#   $  #",
-                "#   .  #",
-                "########"
-            ],
-            [ // Nivel 4
-                "########",
-                "#      #",
-                "# . $  #",
-                "# .$@. #",
-                "#  $   #",
-                "#      #",
-                "########"
-            ],
-            [ // Nivel 5
-                "########",
-                "#      #",
-                "# .  . #",
-                "#  $$  #",                 "#  $$  #",
-                "# .  . #",
-                "#  @   #",
-                "########"
-            ]
+        const levelMap = [
+            "######",
+            "#    #",
+            "# @$ #",
+            "#  . #",
+            "######"
         ];
-
-        let currentLevelIndex = 0;
-        let grid = [];
-        let playerPos = { r: 0, c: 0 };
-        let gameWon = false;
-        let history = []; // Para el botón de deshacer
-
-        function loadLevel(index) {
-            currentLevelIndex = index;
-            gameWon = false;
-            history = []; // Limpiar historial
-            
-            document.getElementById('level-display').innerText = currentLevelIndex + 1;
-            document.getElementById('win-message').style.display = 'none';
-            document.getElementById('btn-next').style.display = 'none';
-            
-            grid = levels[currentLevelIndex].map(row => row.split(''));
-            
-            for (let r = 0; r < grid.length; r++) {
-                for (let c = 0; c < grid[r].length; c++) {
-                    if (grid[r][c] === '@' || grid[r][c] === '+') {
-                        playerPos = { r, c };
-                    }
-                }
-            }
-            render();
-        }
-
-        function nextLevel() {
-            if (currentLevelIndex < levels.length - 1) {
-                loadLevel(currentLevelIndex + 1);
-            }
-        }
-
-        // Guardar estado para deshacer
-        function saveState() {
-            history.push({
-                grid: grid.map(row => [...row]),
-                playerPos: { r: playerPos.r, c: playerPos.c }
-            });
-        }
-
-        function undo() {
-            if (history.length > 0 && !gameWon) {
-                const lastState = history.pop();
-                grid = lastState.grid.map(row => [...row]);
-                playerPos = { r: lastState.playerPos.r, c: lastState.playerPos.c };
-                render();
-            }
-        }
-
-        function render() {
-            const board = document.getElementById('game-board');
-            board.style.gridTemplateColumns = `repeat(${grid[0].length}, 40px)`;
-            board.innerHTML = '';
-
-            for (let r = 0; r < grid.length; r++) {
-                for (let c = 0; c < grid[r].length; c++) {
-                    const cell = document.createElement('div');
-                    cell.classList.add('cell');
-                    const char = grid[r][c];
-
-                    if (char === '#') cell.classList.add('wall');
-                    else cell.classList.add('floor');
-
-                    if (char === '.' || char === '*' || char === '+') {
-                        cell.classList.add('goal');
-                    }
-
-                    if (char === '$' || char === '*') {
-                        const box = document.createElement('div');
-                        box.classList.add('box');
-                        if (char === '*') box.classList.add('on-goal');
-                        cell.appendChild(box);
-                    }
-
-                    if (char === '@' || char === '+') {
-                        const player = document.createElement('div');
-                        player.classList.add('player');
-                        cell.appendChild(player);
-                    }
-
-                    board.appendChild(cell);
-                }
-            }
-        }
-
-        // Controles de teclado
-        window.addEventListener('keydown', (e) => {
-            if (gameWon) return;
-            let dr = 0, dc = 0;
-            
-            if (e.key === 'ArrowUp' || e.key.toLowerCase() === 'w') dr = -1;
-            else if (e.key === 'ArrowDown' || e.key.toLowerCase() === 's') dr = 1;
-            else if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') dc = -1;
-            else if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') dc = 1;
-            else if (e.key.toLowerCase() === 'z') { undo(); return; } // Z para deshacer
-            else return; 
-
-            e.preventDefault(); 
-            handleMove(dr, dc);
-        });
-
-        // Controles táctiles (Swipe) para celular
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        window.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        }, {passive: false});
-
-        window.addEventListener('touchend', e => {
-            if (gameWon || e.target.tagName === 'BUTTON') return;
-            let touchEndX = e.changedTouches[0].screenX;
-            let touchEndY = e.changedTouches[0].screenY;
-            
-            let dx = touchEndX - touchStartX;
-            let dy = touchEndY - touchStartY;
-            
-            if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
-                if (Math.abs(dx) > Math.abs(dy)) {
-                    handleMove(0, dx > 0 ? 1 : -1);
-                } else {
-                    handleMove(dy > 0 ? 1 : -1, 0);
-                }
-            }
-        });
-
-        function handleMove(dr, dc) {
-            if (gameWon) return;
-
-            let nr = playerPos.r + dr;
-            let nc = playerPos.c + dc;
-
-            if (nr < 0 || nr >= grid.length || nc < 0 || nc >= grid[0].length) return;
-            let target = grid[nr][nc];
-
-            if (target === '#') return;
-
-            if (target === ' ' || target === '.') {
-                saveState();
-                updatePlayerPos(nr, nc);
-            } 
-            else if (target === '$' || target === '*') {
-                let nnr = nr + dr;
-                let nnc = nc + dc;
-
-                if (nnr < 0 || nnr >= grid.length || nnc < 0 || nnc >= grid[0].length) return;
-                
-                let pushTarget = grid[nnr][nnc];
-
-                if (pushTarget === ' ' || pushTarget === '.') {
-                    saveState();
-                    grid[nnr][nnc] = pushTarget === '.' ? '*' : '$';
-                    grid[nr][nc] = target === '*' ? '.' : ' ';
-                    
-                    updatePlayerPos(nr, nc);
-                    checkWin();
-                }
-            }
-        }
-
-        function updatePlayerPos(nr, nc) {
-            let currentCell = grid[playerPos.r][playerPos.c];
-            grid[playerPos.r][playerPos.c] = currentCell === '+' ? '.' : ' ';
-
-            let newCell = grid[nr][nc];
-            grid[nr][nc] = newCell === '.' ? '+' : '@';
-
-            playerPos = { r: nr, c: nc };
-            render();
-        }
-
-        function checkWin() {
-            let boxesRemaining = false;
-            for (let r = 0; r < grid.length; r++) {
-                for (let c = 0; c < grid[r].length; c++) {
-                    if (grid[r][c] === '$') boxesRemaining = true;
-                }
-            }
-            
-            if (!boxesRemaining) {
-                gameWon = true;
-                const msg = document.getElementById('win-message');
-                msg.style.display = 'block';
-                
-                if (currentLevelIndex < levels.length - 1) {
-                    msg.innerText = '¡Nivel Completado! 🎉';
-                    document.getElementById('btn-next').style.display = 'inline-block';
-                } else {
-                    msg.innerText = '🏆 ¡Juego Completado! Eres un genio 🏆';
-                }
-            }
-        }
-
-        loadLevel(0);
+        const nextLevelUrl = "nivel2.html"; // Al ganar, irá a este archivo
     </script>
+    
+    <!-- Cargar la lógica del juego -->
+    <script src="game.js"></script>
 </body>
 </html>
