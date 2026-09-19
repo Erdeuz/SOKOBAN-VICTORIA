@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sokoban - Nivel 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Sokoban</h1>
+    <h2>Nivel 2</h2>
+    <p>No arrincones la caja.</p>
+
+    <div id="game-board"></div>
+    <div id="win-message">¡Nivel Completado! 🎉</div>
+
+    <!-- (Los mismos controles y botones que en el index.html) -->
+    <div class="controls">
+        <div></div><button onclick="handleMove(-1, 0)">⬆️</button><div></div>
+        <button onclick="handleMove(0, -1)">⬅️</button>
+        <button onclick="handleMove(1, 0)">⬇️</button>
+        <button onclick="handleMove(0, 1)">➡️</button>
+    </div>
+
+    <div class="action-buttons">
+        <button class="btn btn-undo" onclick="undo()">↩️ Deshacer</button>
+        <button class="btn btn-restart" onclick="initGame()">🔄 Reiniciar</button>
+        <button id="btn-next" class="btn btn-next">Siguiente ➡️</button>
+    </div>
+
+    <!-- EL MAPA CAMBIA AQUÍ -->
+    <script>
+        const levelMap = [
+            "#######",
+            "#     #",
+            "#  .  #",
+            "# $ $ #",
+            "#  .  #",
+            "#  @  #",
+            "#######"
+        ];
+        const nextLevelUrl = "nivel3.html"; // Al ganar, irá al nivel 3
+    </script>
+    
+    <script src="game.js"></script>
+</body>
+</html>
